@@ -19,8 +19,8 @@ That's it. The setup wizard handles config, API keys, database, hooks, and MCP s
 
 - **Persistent Memory** -- Semantic search across all previous sessions. Your agent remembers what worked, what didn't, and what you prefer.
 - **Self-Improvement** -- Evolution cycles extract learnings, detect patterns, and consolidate memory between sessions. Your agent genuinely gets better over time.
-- **53 Workflows** -- Email triage, code review, security scanning, content scheduling, job tracking, and more. Enable with a toggle.
-- **44 Skills** -- Pre-loaded capabilities your agent can use immediately. Add your own.
+- **200+ Workflows** -- Email triage, code review, security scanning, content scheduling, job tracking, and more. Enable with a toggle.
+- **85 Skills** -- Pre-loaded capabilities your agent can use immediately. Add your own.
 - **9 MCP Servers** -- Memory, peer discovery, web search, IT support, calendar, design, desktop automation, file management.
 - **Tailscale Mesh Networking** (Pro) -- Agents on different machines share memory, transfer files, and coordinate work over encrypted P2P connections.
 - **Telegram + Email Integration** -- Your agent messages you when tasks finish, checks your inbox, and responds automatically.
@@ -39,7 +39,7 @@ AIBrain uses **SelRoute** -- a selective routing approach for memory retrieval v
 | | Free | Pro ($9.95/mo) | Team ($29.95/mo) |
 |---|---|---|---|
 | Persistent memory | Yes | Yes | Yes |
-| 53 workflows + 44 skills | Yes | Yes | Yes |
+| 200+ workflows + 85 skills | Yes | Yes | Yes |
 | 9 MCP servers | Yes | Yes | Yes |
 | Evolution cycles | Yes | Yes | Yes |
 | Dashboard + PWA | Yes | Yes | Yes |
@@ -69,7 +69,7 @@ Your Agent (Claude, Cursor, Copilot, Ollama, any MCP client)
 AIBrain (brain layer)
     |
     +-- Memory DB (SQLite + embeddings + SelRoute)
-    +-- 53 Workflows (cron-scheduled, toggleable)
+    +-- 200+ Workflows (cron-scheduled, toggleable)
     +-- 9 MCP Servers (72 tools)
     +-- Tailscale Mesh (Pro -- encrypted P2P)
     +-- Dashboard (30 components, PWA)
