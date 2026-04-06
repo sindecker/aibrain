@@ -1,6 +1,6 @@
 # AIBrain - Self-Improving Agent Brain
 
-> Your AI agent, better every day. Persistent memory, selective routing, multi-agent mesh.
+> Your AI agent, better every day. Persistent memory, agent teams, flow orchestration, document ingestion.
 
 AIBrain gives any AI agent persistent memory that improves over time. Install it once, and your agent remembers everything across sessions, learns from every conversation, and coordinates with other agents over encrypted mesh networking.
 
@@ -13,46 +13,63 @@ pip install aibrain
 aibrain setup
 ```
 
-That's it. The setup wizard handles config, API keys, database, hooks, and MCP server registration.
+## What's New in v1.2.0
 
-## What You Get
+- **Agent Teams** -- Typed agents with role/goal/backstory, structured tasks with guardrails, sequential and hierarchical execution
+- **Flow Engine** -- `@start`, `@listen`, `@router` decorators for state machines with conditional routing and human-in-the-loop
+- **Document Ingestion** -- `brain.ingest("report.pdf")` with 7 source types and sentence-aware chunking
+- **Universal MCP Client** -- Connect to ANY MCP server via Stdio, HTTP, or SSE
+- **Tool Hooks** -- Intercept and modify tool/LLM calls
+- **33 Event Types** -- Full lifecycle observability
 
-- **Persistent Memory** -- Semantic search across all previous sessions. Your agent remembers what worked, what didn't, and what you prefer.
-- **Self-Improvement** -- Evolution cycles extract learnings, detect patterns, and consolidate memory between sessions. Your agent genuinely gets better over time.
-- **200+ Workflows** -- Email triage, code review, security scanning, content scheduling, job tracking, and more. Enable with a toggle.
-- **85 Skills** -- Pre-loaded capabilities your agent can use immediately. Add your own.
-- **9 MCP Servers** -- Memory, peer discovery, web search, IT support, calendar, design, desktop automation, file management.
-- **Tailscale Mesh Networking** (Pro) -- Agents on different machines share memory, transfer files, and coordinate work over encrypted P2P connections.
-- **Telegram + Email Integration** -- Your agent messages you when tasks finish, checks your inbox, and responds automatically.
-- **Dashboard** -- 30-component browser UI with visual workflow builder, knowledge graph, cost tracking, and mobile PWA.
-- **Brain Marketplace** (Coming) -- Buy and sell domain-specific trained brains.
-- **Setup Wizard** -- One command configures everything. Works on Linux, macOS, and Windows.
+## Quick Start
+
+```python
+from aibrain import Agent, Task, Team, Brain
+
+researcher = Agent(role="Researcher", goal="Find accurate data")
+writer = Agent(role="Writer", goal="Write compelling content")
+
+research = Task(description="Research AI trends", expected_output="Summary report", agent=researcher)
+article = Task(description="Write blog post", expected_output="1000 word post", agent=writer, context=[research])
+
+team = Team(agents=[researcher, writer], tasks=[research, article])
+result = team.kickoff()
+
+brain = Brain()
+brain.ingest("quarterly_report.pdf")
+```
+
+## Features
+
+- **Persistent Memory** -- Semantic search with selective query routing (SelRoute)
+- **Agent Teams** -- Compose agents into teams with guardrails, delegation, and memory injection
+- **Flow Engine** -- Multi-step workflows with conditional branching and approval gates
+- **Document Ingestion** -- PDF, CSV, Excel, JSON, Text, directories into searchable memory
+- **Universal MCP Client** -- Connect to any MCP server, three transports, persistent registry
+- **Self-Improvement** -- Evolution engine extracts learnings and consolidates memory
+- **200+ Workflows** -- Email, code review, security, content, job tracking, and more
+- **85 Skills** -- Pre-loaded capabilities
+- **9 MCP Servers** -- 72 tools out of the box
+- **Tool Hooks** -- @before/@after interceptors for logging, security, policy
+- **45-Page Dashboard** -- Teams, flows, ingestion, MCP hub, knowledge graph, cost tracking
+- **Tailscale Mesh** (Pro) -- Encrypted P2P agent coordination
+- **Telegram + Email** -- Notifications and inbox automation
 
 ## Memory Routing (SelRoute)
 
-AIBrain uses **SelRoute** -- a selective routing approach for memory retrieval validated across 4 models, 4 benchmarks, and 4,486 evaluations. Different query types get routed to different retrieval strategies instead of one-size-fits-all vector similarity.
-
-[Read the paper](https://github.com/sindecker/selroute)
+Selective routing validated across 4 models, 4 benchmarks, 4,486 evaluations. [Read the paper](https://github.com/sindecker/selroute)
 
 ## Pricing
 
 | | Free | Pro ($9.95/mo) | Team ($29.95/mo) |
 |---|---|---|---|
-| Persistent memory | Yes | Yes | Yes |
+| Memory + teams + flows + ingestion | Yes | Yes | Yes |
 | 200+ workflows + 85 skills | Yes | Yes | Yes |
-| 9 MCP servers | Yes | Yes | Yes |
-| Evolution cycles | Yes | Yes | Yes |
-| Dashboard + PWA | Yes | Yes | Yes |
+| 9 MCP servers + universal client | Yes | Yes | Yes |
+| Dashboard + evolution + hooks | Yes | Yes | Yes |
 | Tailscale mesh networking | - | Yes | Yes |
-| Brain marketplace | - | Yes | Yes |
 | Shared team brain | - | - | Yes |
-| Up to 10 agents | - | - | Yes |
-
-## Documentation
-
-- [Getting Started](https://myaibrain.org/docs/getting-started.html)
-- [User Guide](https://myaibrain.org/docs/guide.html)
-- [Workflow Reference](https://myaibrain.org/docs/workflows.html)
 
 ## Links
 
@@ -60,28 +77,7 @@ AIBrain uses **SelRoute** -- a selective routing approach for memory retrieval v
 - **PyPI:** [pypi.org/project/aibrain](https://pypi.org/project/aibrain/)
 - **SelRoute Paper:** [github.com/sindecker/selroute](https://github.com/sindecker/selroute)
 
-## Architecture
-
-```
-Your Agent (Claude, Cursor, Copilot, Ollama, any MCP client)
-    |
-    v
-AIBrain (brain layer)
-    |
-    +-- Memory DB (SQLite + embeddings + SelRoute)
-    +-- 200+ Workflows (cron-scheduled, toggleable)
-    +-- 9 MCP Servers (72 tools)
-    +-- Tailscale Mesh (Pro -- encrypted P2P)
-    +-- Dashboard (30 components, PWA)
-    +-- Evolution Engine (self-improvement)
-    +-- Telegram + Email (notifications, inbox)
-```
-
-## Requirements
-
-- Python 3.10+
-- Node.js 18+ (for dashboard, optional)
-- Works on Linux, macOS, Windows
+652 tests passing. Python 3.10+. Linux, macOS, Windows.
 
 ## License
 
