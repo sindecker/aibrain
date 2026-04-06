@@ -13,14 +13,17 @@ pip install aibrain
 aibrain setup
 ```
 
-## What's New in v1.2.0
+## What's New in v1.2.2
 
+- **Security hardening** -- Full audit complete. 24 findings fixed. ShellTool allowlisted, PythonREPL sandboxed, SSRF protection, CSRF middleware, secrets vault hardened.
+- **Tiered Retrieval** -- `smart_search` routes queries through category summaries, SelRoute reranking, memory dedup, explainable recall, and salience scoring.
+- **Tool Hooks** -- `@before`/`@after` interceptors for logging, security, and policy on any tool or LLM call.
+- **33 Event Types** -- Full lifecycle observability across agent, team, flow, tool, and memory operations.
+- **Experiment & Regression Testing** -- Built-in A/B framework for workflows and retrieval strategies.
 - **Agent Teams** -- Typed agents with role/goal/backstory, structured tasks with guardrails, sequential and hierarchical execution
 - **Flow Engine** -- `@start`, `@listen`, `@router` decorators for state machines with conditional routing and human-in-the-loop
 - **Document Ingestion** -- `brain.ingest("report.pdf")` with 7 source types and sentence-aware chunking
 - **Universal MCP Client** -- Connect to ANY MCP server via Stdio, HTTP, or SSE
-- **Tool Hooks** -- Intercept and modify tool/LLM calls
-- **33 Event Types** -- Full lifecycle observability
 
 ## Quick Start
 
@@ -51,8 +54,13 @@ brain.ingest("quarterly_report.pdf")
 - **200+ Workflows** -- Email, code review, security, content, job tracking, and more
 - **85 Skills** -- Pre-loaded capabilities
 - **9 MCP Servers** -- 72 tools out of the box
+- **15 Built-in Tools** -- Ready-to-use tools for common agent tasks
+- **8 LLM Adapters** -- Claude, GPT, Ollama, and more through a unified interface
 - **Tool Hooks** -- @before/@after interceptors for logging, security, policy
+- **33 Event Types** -- Full lifecycle observability
+- **Tiered Retrieval** -- smart_search with category summaries, SelRoute reranking, dedup, explainable recall, salience scoring
 - **45-Page Dashboard** -- Teams, flows, ingestion, MCP hub, knowledge graph, cost tracking
+- **Security Hardened** -- 24 audit findings fixed, SSRF/CSRF protection, sandboxed tools, encrypted secrets vault
 - **Tailscale Mesh** (Pro) -- Encrypted P2P agent coordination
 - **Telegram + Email** -- Notifications and inbox automation
 
@@ -77,7 +85,7 @@ Selective routing validated across 4 models, 4 benchmarks, 4,486 evaluations. [R
 - **PyPI:** [pypi.org/project/aibrain](https://pypi.org/project/aibrain/)
 - **SelRoute Paper:** [github.com/sindecker/selroute](https://github.com/sindecker/selroute)
 
-652 tests passing. Python 3.10+. Linux, macOS, Windows.
+847 tests passing. Python 3.10+. Linux, macOS, Windows.
 
 ## License
 
