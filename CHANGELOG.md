@@ -5,6 +5,20 @@ All notable changes to AIBrain will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.4] - 2026-04-07
+
+### Improved
+- **Content audit** -- Fixed 51 findings across all public-facing content. Corrected tool counts (15 built-in tools), removed internal product names, removed competitor names, marked Brain Marketplace as conceptual, replaced dead links, standardized version and test counts.
+- **Test suite** -- 869 tests passing across all modules.
+
+## [1.2.3] - 2026-04-07
+
+### Added
+- **Pre-publish scanner** -- Automated content scanner that catches internal names, stale stats, and dead links before any public release.
+
+### Improved
+- **Dashboard** -- Full QA audit fixes across 10 files, 21 issues resolved.
+
 ## [1.2.2] - 2026-04-07
 
 ### Security
@@ -19,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Salience scoring** — Memories scored by contextual relevance for smarter recall.
 
 ### Improved
-- **Test suite** — 847 tests passing across all modules.
+- **Test suite** — 847 tests passing across all modules (now 869 in v1.2.4).
 
 ## [1.2.1] - 2026-04-07
 
