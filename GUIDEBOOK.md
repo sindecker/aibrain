@@ -1,6 +1,6 @@
 # AIBrain — The Complete Guidebook
 
-**Version:** 1.2.2 | **Last updated:** 2026-04-07
+**Version:** 1.2.4 | **Last updated:** 2026-04-07
 
 AIBrain is a portable agent operating system that gives any AI agent persistent memory, typed Agent/Task/Team composition, a decorator-driven Flow engine, document ingestion, universal MCP client connectivity, self-learning workflows, multi-agent coordination, and a full browser dashboard. It works with Claude, GPT, Ollama, or any LLM — no vendor lock-in.
 
@@ -45,9 +45,8 @@ This guidebook covers everything AIBrain can do. Use it as a reference when sett
 
 ```bash
 # Install
-git clone https://github.com/sindecker/aibrain.git
-cd aibrain
-python install.py
+pip install aibrain
+aibrain setup    # interactive wizard
 
 # Start
 aibrain start              # Restore stack + launch services
@@ -74,7 +73,7 @@ Your brain is a SQLite database (`aibrain.db`) containing everything the agent k
 Structured knowledge units with types (user, feedback, project, reference, pattern, decision), importance scores, tags, timestamps, and optional vector embeddings for semantic search.
 
 ### Workflows
-Automated tasks that run on schedules (cron) or triggers. AIBrain ships with 55+ workflow scripts covering productivity, research, communication, security, self-learning, and more. Each workflow reads from and writes to the brain.
+Automated tasks that run on schedules (cron) or triggers. AIBrain ships with 200+ workflow scripts covering productivity, research, communication, security, self-learning, and more. Each workflow reads from and writes to the brain.
 
 ### Brain Packs
 Domain specialization bundles. Activating a pack enables a curated set of workflows for a specific use case (developer, content creator, security pro, etc.).
@@ -228,7 +227,7 @@ memory_recall  — Load top memories by importance
 | `aibrain scale compact` | Archive stale memories |
 | `aibrain scale analyze` | Shard recommendations |
 
-### Marketplace
+### Marketplace (Conceptual -- not yet available)
 | Command | Description |
 |---------|-------------|
 | `aibrain marketplace package --name <n>` | Package brain for sale |
@@ -262,7 +261,7 @@ memory_recall  — Load top memories by importance
 
 ## 5. Workflows
 
-AIBrain ships with 55+ workflow scripts. Each runs independently and reads/writes to the brain database.
+AIBrain ships with 200+ workflow scripts. Each runs independently and reads/writes to the brain database.
 
 ### Productivity
 | Workflow | Schedule | What it does |
@@ -1290,7 +1289,7 @@ The full agent operating system:
 - **Multi-Agent Ops** — agent sync, memory diff, cross-agent evolution
 - **Cloud Sync** — sync brain across devices
 - **Advanced Analytics** — usage patterns, memory health, workflow performance
-- **Marketplace Access** — buy and sell trained brains
+- **Marketplace Access** — buy and sell trained brains (conceptual -- not yet available)
 
 ### Team Tier — $29.95/mo
 For teams running multiple agents:
@@ -1308,7 +1307,7 @@ For organizations:
 - Priority support
 - Custom embedding models
 
-### Marketplace
+### Marketplace (Conceptual -- not yet available)
 - Sell your trained brains to other users
 - 70/30 revenue split (seller/platform)
 - Stripe Connect for payouts
@@ -1365,12 +1364,9 @@ Install the Tailscale app on your phone (iOS/Android) to make your phone a node 
 
 ### Install Methods
 ```bash
-# From source (recommended)
-git clone https://github.com/sindecker/aibrain.git
-cd aibrain && python install.py
-
-# From PyPI
-pip install aibrain-core
+# From PyPI (recommended)
+pip install aibrain
+aibrain setup
 
 # Portable (Windows)
 python install.py --portable
@@ -1554,10 +1550,10 @@ Restart the MCP server. Check Python path and database path are correct.
 | API endpoints | 170+ |
 | Brain packs | 8 |
 | Free-tier features | Memory, web search, basic files, local calendar, dashboard, PWA, approval queue |
-| Pro-tier features | IT support, peer mesh, Tailscale networking, desktop automation, design, full calendar, full files, skill evolution, auto-experiment, CLI-Anything, content generation, multi-agent ops, marketplace |
+| Pro-tier features | IT support, peer mesh, Tailscale networking, desktop automation, design, full calendar, full files, skill evolution, auto-experiment, CLI-Anything, content generation, multi-agent ops |
 | Team-tier features | Team brains, mesh merge, multi-user, team workflows |
 
 ---
 
 *AIBrain is proprietary software. All rights reserved.*
-*Built by DeckerOps — https://myaibrain.org*
+*https://myaibrain.org*
