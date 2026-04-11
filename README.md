@@ -1,25 +1,37 @@
 # AIBrain -- Your AI agent that remembers, learns, and acts
 
-> **Stop configuring. Start automating.** One install. 200+ workflows. Agent teams. Flow engine. Document ingestion. Universal MCP. Self-improving. Runs locally, no cloud lock-in.
+> **Stop configuring. Start automating.** One install. 60 ready-to-run workflows. Agent teams. Flow engine. Document ingestion. Universal MCP. Self-improving via honest-rubric divergence detection. Runs locally, no cloud lock-in.
 
-AIBrain is a self-hosted operating system for AI agents. It gives any agent persistent memory, typed Agent/Task/Team composition, a decorator-driven Flow engine, document ingestion, universal MCP client connectivity, a reactive workflow engine, a self-improvement loop, multi-model LLM routing, an approval queue, inter-agent messaging, and 200+ ready-to-run workflows -- all behind a 45-page browser dashboard. Deploy it on a laptop, a VPS, or in Docker; your agent carries its entire brain with it.
+AIBrain is a self-hosted operating system for AI agents. It gives any agent persistent memory, typed Agent/Task/Team composition, a decorator-driven Flow engine, document ingestion, universal MCP client connectivity, a reactive workflow engine, a self-improvement loop with honest-rubric divergence detection, multi-model LLM routing, an approval queue, inter-agent messaging, and 60 ready-to-run workflows -- all behind a 53-page browser dashboard. Deploy it on a laptop, a VPS, or in Docker; your agent carries its entire brain with it.
 
-![AIBrain](https://img.shields.io/badge/AIBrain-v1.2.4-00F5D4?style=flat-square) ![License](https://img.shields.io/badge/license-Proprietary-blue?style=flat-square) ![Python](https://img.shields.io/badge/python-3.10+-blue?style=flat-square) ![Tests](https://img.shields.io/badge/tests-869-00F5D4?style=flat-square) ![Workflows](https://img.shields.io/badge/workflows-200+-00F5D4?style=flat-square) ![Routes](https://img.shields.io/badge/API_routes-165+-00F5D4?style=flat-square) ![Dashboard](https://img.shields.io/badge/dashboard-45_pages-61DAFB?style=flat-square)
+![AIBrain](https://img.shields.io/badge/AIBrain-v1.4.0-00F5D4?style=flat-square) ![License](https://img.shields.io/badge/license-Proprietary-blue?style=flat-square) ![Python](https://img.shields.io/badge/python-3.10+-blue?style=flat-square) ![Tests](https://img.shields.io/badge/tests-2065-00F5D4?style=flat-square) ![Workflows](https://img.shields.io/badge/workflows-60-00F5D4?style=flat-square) ![Dashboard](https://img.shields.io/badge/dashboard-53_pages-61DAFB?style=flat-square) ![MCP](https://img.shields.io/badge/MCP-native-FFB000?style=flat-square)
 
 ---
 
-## What's New in v1.2.4
+## What's New in v1.4.0
 
-- **Security hardening** -- Full audit complete. 24 findings fixed. ShellTool allowlisted, PythonREPL sandboxed, SSRF protection, CSRF middleware, secrets vault hardened.
-- **Tiered Retrieval** -- `smart_search` routes queries through category summaries, SelRoute reranking, memory deduplication, explainable recall, and salience scoring.
-- **Tool Hooks** -- `@before` and `@after` interceptors for logging, security, and policy enforcement on any tool or LLM call.
-- **33 Event Types** -- Full lifecycle observability across agent, team, flow, tool, and memory operations.
-- **Experiment & Regression Testing** -- Built-in A/B testing framework for workflows and retrieval strategies.
+Shipped 2026-04-11. The methodology layer.
+
+- **Honest-rubric divergence loop** -- Every workflow execution produces both a self-score and an independent eval-score. When they diverge beyond a threshold, the run is flagged for review. The harness REFUSES to fake quality numbers — defaults are `None` until a real measurement lands. This is the load-bearing piece of the compounding learning loop.
+- **Cost honesty refuse gate** -- The harness rejects dishonest `cost_cents=0` for non-deterministic tasks. If a run claims it cost nothing but used a paid model, it fails the gate. No more silently lying audit trails.
+- **Workflow harness wire (P0)** -- Every workflow execution flows through `aibrain.core.workflow_runner` with task classification, model routing, authority check, quality eval, audit trail, and learning feedback. One pipeline, no bypass.
+- **Hippocampus-as-a-service MCP endpoint** -- Standalone MCP server at `aibrain/mcp/server.py` (JSON-RPC 2.0 over stdio). Six tools: `memory_store`, `memory_search`, `memory_recall`, `memory_stats`, `memory_ingest`, `memory_prepare`. Bearer token auth. Stable v1.0.0 schema. Client recipes for Cursor, Claude Code, Zed, Continue.
+- **Public/private lens split** -- 50-entry public floor (20 roles + 13 specialty + 10 archetypes + 2 always-on + 5 enterprise stubs). Tier-aware lens routing. CI-enforced wheel-leak check — no private personas ship in the public package.
+- **Canonical-DB invariant (split-brain prevention)** -- 37-file route through one resolver. Pre-commit linter blocks any new direct DB path. `aibrain doctor` CLI for health checks. `secrets_filter` to prevent credential leaks in commits.
+- **Token-to-cents equivalence** -- `aibrain usage` CLI for sub-allowance tracking. Cost honesty enforced at the harness level.
+- **2,065 tests passing** -- Up from 869 in the v1.2.4 release. The honest-measurement rebuild caught five stale assertions in `test_harness.py` that were enforcing the old "fake-a-default" behavior — those were updated to match the contract.
+- **53-page browser dashboard** -- Up from 45 pages.
+- **Built-in benchmarks** -- 8 results captured with honest RECOR loss + +25.7 to +35.7 gains across LoCoMo and LongMemEval.
+
+Earlier capability layers (still shipped):
+
 - **Agent/Task/Team system** -- Typed multi-agent composition. Define agents with role, goal, and backstory. Create tasks with expected output and tools. Run teams with sequential or hierarchical processes, delegation, and guardrails with retry.
 - **Flow engine** -- Decorator-driven state machines. `@start`, `@listen`, `@router` decorators for conditional routing. Typed state, persistence for long-running flows, human-in-the-loop pause/resume, `@retry`, `@timeout`, and visualization.
 - **Universal MCP client** -- Connect to any MCP server from Python. Three transports (stdio, HTTP, SSE), tool bridging, and a registry for managing multiple servers.
 - **Document ingestion** -- `brain.ingest("file.pdf")`. 7 source types (PDF, CSV, Excel, JSON, JSONL, Text, Markdown, directories). Sentence-aware chunking, incremental ingestion.
-- **45+ dashboard pages** -- Teams, flows, ingestion, MCP management, and more.
+- **Tiered Retrieval** -- `smart_search` routes queries through category summaries, SelRoute reranking, memory deduplication, explainable recall, and salience scoring.
+- **Tool Hooks** -- `@before` and `@after` interceptors for logging, security, and policy enforcement on any tool or LLM call.
+- **Security hardening** -- Full audit. ShellTool allowlisted, PythonREPL sandboxed, SSRF protection, CSRF middleware, secrets vault hardened.
 
 ---
 
@@ -206,9 +218,9 @@ Three transports: stdio, HTTP, and SSE. Tool bridging lets you call remote MCP t
 
 **Universal MCP Client** -- Connect to any MCP server from Python. `MCPServerRegistry` manages multiple servers. Three transports: stdio, HTTP, and SSE. Tool bridging calls remote MCP tools as local Python functions.
 
-**45-Page Dashboard** -- Home, Memories, Knowledge Graph, Workflows, **Visual Workflow Builder**, **Content Pipeline**, Chat, Approvals, Agents, Activity Timeline, Library, Webhooks, Costs, MCP Hub, Skills Marketplace, Settings, Setup Wizard, Command Palette, Mobile Layout, Mobile Pairing, Toast notifications, Notification Center, Keyboard Shortcuts, System Logs, API Playground, Backup Manager, Task Runner, Integrations Hub, Onboarding Tour, Error Boundary, Teams, Flows, Ingest, Company Org Charts, Agent Detail, Goals, Secrets Vault, and more. Every aspect of your agent is visible and controllable from the browser.
+**53-Page Dashboard** -- Home, Memories, Knowledge Graph, Workflows, **Visual Workflow Builder**, **Content Pipeline**, Chat, Approvals, Agents, Activity Timeline, Library, Webhooks, Costs, MCP Hub, Skills Marketplace, Settings, Setup Wizard, Command Palette, Mobile Layout, Mobile Pairing, Toast notifications, Notification Center, Keyboard Shortcuts, System Logs, API Playground, Backup Manager, Task Runner, Integrations Hub, Onboarding Tour, Error Boundary, Teams, Flows, Ingest, Company Org Charts, Agent Detail, Goals, Secrets Vault, and more. Every aspect of your agent is visible and controllable from the browser.
 
-**200+ Automated Workflows** -- Pre-built workflows across six registries (core, skill, user, content, ops, custom) covering productivity, research, communication, devops, self-improvement, code analysis, security, content generation, multi-agent ops, and business metrics. Includes Email Triage, ArXiv Tracker, Autonomous Researcher, Cross-Domain Connector, Burnout Detector, Content Batch Scheduler, and Brain Sync Checker. Enable any workflow with a single toggle; schedules are fully configurable via cron expressions.
+**60 Ready-to-Run Workflows** -- Pre-built workflows across six registries (core, skill, user, content, ops, custom) covering productivity, research, communication, devops, self-improvement, code analysis, security, content generation, multi-agent ops, and business metrics. Every workflow execution flows through the universal harness with task classification, model routing, authority check, quality eval, audit trail, and learning feedback. Enable any workflow with a single toggle; schedules are fully configurable via cron expressions.
 
 **Multi-Model LLM Router** -- Route tasks to local Ollama (free) or cloud Claude/GPT with automatic fallback via litellm. Track costs per model, per workflow, per day. Test provider connections directly from Settings.
 
@@ -375,7 +387,7 @@ Three tiers of configuration (in priority order):
 
 ## Workflows
 
-200+ workflows span six registries plus standalone scripts in the `workflows/` directory. Enable any workflow with a single toggle in the dashboard or by setting `"enabled": true` in `scheduled_jobs.json`.
+60 ready-to-run workflows span six registries plus standalone scripts in the `workflows/` directory. Enable any workflow with a single toggle in the dashboard or by setting `"enabled": true` in `scheduled_jobs.json`. Every execution flows through the universal harness — see "Honest-Rubric Harness" below.
 
 ### Registry Overview
 

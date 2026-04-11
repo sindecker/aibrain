@@ -1,6 +1,6 @@
 # AIBrain — The Complete Guidebook
 
-**Version:** 1.2.4 | **Last updated:** 2026-04-07
+**Version:** 1.4.0 | **Last updated:** 2026-04-12
 
 AIBrain is a portable agent operating system that gives any AI agent persistent memory, typed Agent/Task/Team composition, a decorator-driven Flow engine, document ingestion, universal MCP client connectivity, self-learning workflows, multi-agent coordination, and a full browser dashboard. It works with Claude, GPT, Ollama, or any LLM — no vendor lock-in.
 
@@ -73,7 +73,7 @@ Your brain is a SQLite database (`aibrain.db`) containing everything the agent k
 Structured knowledge units with types (user, feedback, project, reference, pattern, decision), importance scores, tags, timestamps, and optional vector embeddings for semantic search.
 
 ### Workflows
-Automated tasks that run on schedules (cron) or triggers. AIBrain ships with 200+ workflow scripts covering productivity, research, communication, security, self-learning, and more. Each workflow reads from and writes to the brain.
+Automated tasks that run on schedules (cron) or triggers. AIBrain ships with 60 ready-to-run workflow scripts covering productivity, research, communication, security, self-learning, and more. Each workflow reads from and writes to the brain, and every execution flows through the universal harness with task classification, model routing, authority check, quality eval, audit trail, and learning feedback.
 
 ### Brain Packs
 Domain specialization bundles. Activating a pack enables a curated set of workflows for a specific use case (developer, content creator, security pro, etc.).
@@ -261,7 +261,7 @@ memory_recall  — Load top memories by importance
 
 ## 5. Workflows
 
-AIBrain ships with 200+ workflow scripts. Each runs independently and reads/writes to the brain database.
+AIBrain ships with 60 ready-to-run workflow scripts. Each runs independently, reads/writes to the brain database, and is harnessed with honest-rubric quality evaluation, model routing, and audit trail.
 
 ### Productivity
 | Workflow | Schedule | What it does |
@@ -404,7 +404,7 @@ AIBrain works as a Progressive Web App (PWA). Install on your phone, pair via QR
 
 ## 8. API Reference
 
-AIBrain exposes 165+ REST/WebSocket endpoints. Full OpenAPI docs available at `/docs` when running the server.
+AIBrain exposes a REST + WebSocket API surface. Full OpenAPI docs available at `/docs` when running the server.
 
 ### Key Endpoint Groups
 | Group | Endpoints | Description |
@@ -1544,10 +1544,10 @@ Restart the MCP server. Check Python path and database path are correct.
 |----------|-------|
 | MCP servers | 9 |
 | MCP tools (total) | 72 |
-| Dashboard pages | 45+ |
-| Workflow scripts | 200+ |
+| Dashboard pages | 53 |
+| Workflow scripts | 60 |
+| Tests passing | 2,065 |
 | CLI commands | 50+ |
-| API endpoints | 170+ |
 | Brain packs | 8 |
 | Free-tier features | Memory, web search, basic files, local calendar, dashboard, PWA, approval queue |
 | Pro-tier features | IT support, peer mesh, Tailscale networking, desktop automation, design, full calendar, full files, skill evolution, auto-experiment, CLI-Anything, content generation, multi-agent ops |

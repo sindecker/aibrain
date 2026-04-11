@@ -5,6 +5,29 @@ All notable changes to AIBrain will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-04-11
+
+### Added
+- **Honest-rubric divergence loop** — Every workflow execution produces both a self-score and an independent eval-score. When they diverge beyond a threshold, the run is flagged for review. The harness REFUSES to fake quality numbers — defaults are `None` until a real measurement lands. Load-bearing piece of the compounding learning loop.
+- **Cost honesty refuse gate** — The harness rejects dishonest `cost_cents=0` for non-deterministic tasks. If a run claims it cost nothing but used a paid model, it fails the gate. No silently lying audit trails.
+- **Workflow harness wire (P0)** — Every workflow execution flows through `aibrain.core.workflow_runner` with task classification, model routing, authority check, quality eval, audit trail, and learning feedback. One pipeline, no bypass.
+- **Hippocampus-as-a-service MCP endpoint** — Standalone MCP server at `aibrain/mcp/server.py` (JSON-RPC 2.0 over stdio). Six tools: `memory_store`, `memory_search`, `memory_recall`, `memory_stats`, `memory_ingest`, `memory_prepare`. Bearer token auth. Stable v1.0.0 schema. Client recipes for Cursor, Claude Code, Zed, Continue.
+- **Public/private lens split** — 50-entry public floor (20 roles + 13 specialty + 10 archetypes + 2 always-on + 5 enterprise stubs). Tier-aware lens routing via `lens_router.py`. CI-enforced wheel-leak check — no private personas ship in the public package.
+- **Canonical-DB invariant (split-brain prevention)** — 37-file route through one resolver. Pre-commit linter blocks any new direct DB path. `aibrain doctor` CLI for health checks. `secrets_filter` to prevent credential leaks in commits.
+- **Token-to-cents equivalence** — `aibrain usage` CLI for sub-allowance tracking. Cost honesty enforced at the harness level.
+- **Built-in benchmarks** — 8 benchmark results captured with honest RECOR loss + +25.7 to +35.7 gains across LoCoMo and LongMemEval.
+
+### Improved
+- **2,065 tests passing** — Up from 869 in v1.2.4. Five stale `test_harness.py` assertions updated to match the honest-measurement contract (defaults are `None`, not `0.0`).
+- **53 dashboard pages** — Up from 45 pages.
+- **Pricing rate table corrections** — Opus 4.6 $5/$25, Haiku 4.5 $1/$5, Sonnet 4.x $3/$15. Bare family model enrichment ("sonnet" → "sonnet-unknown") so the harness never misroutes to a stale model name.
+
+### Fixed
+- **`_find_db` existence check** (Bug #6) — read/write semantics split, fresh installs no longer silently no-op.
+- **Test suite repair** — pre-existing failures and errors resolved across `test_harness.py`, `test_brain_export_import.py`, `test_category_summaries.py`.
+- **`__version__` runtime string** — bumped to 1.4.0 (caught by fresh-venv smoke test).
+- **Google app password regex** — tightened to require an explicit label, eliminates the "floor with zero pers" false positive.
+
 ## [1.2.4] - 2026-04-07
 
 ### Improved
