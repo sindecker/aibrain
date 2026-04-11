@@ -5,6 +5,24 @@ All notable changes to AIBrain will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2026-04-12
+
+### Security
+- **AIBRAIN_SIGNING_KEY now mandatory (P0)** — `aibrain_licensing.py` no longer falls back to a hardcoded signing key. The env var must be set or import raises `ValueError` at import time. A public hardcoded fallback would let anyone reading the open-source repo mint valid license keys. Fail-loud at import is the correct contract. Upgraders must `export AIBRAIN_SIGNING_KEY="<secret>"` before any aibrain command works.
+
+### Added
+- **Per-user license_state writes** — `backend/main.py` now writes license state per user via the new `_write_license_state_per_user()` helper. `client_reference_id → users.id → email → users.email` resolution chain so the Stripe webhook knows which user to credit. Closes the multi-user attribution gap from the LeadEng Stripe fix bundle.
+- **V2 persona registry** — `aibrain/core/workflow_runner.py` registers `intel_agent_v2` and the rest of the V2 persona fleet in `WORKFLOW_REGISTRY`. New `update_aibrain_live_truth` workflow registered.
+- **V2 persona path resolution** — `aibrain/core/superworker.py` looks for `*_v2.md` in `decker_system/02_subagents/` before falling back to V1, honoring the V2-preference rule across the spawn path.
+- **Content gate 14 (template_freshness)** — Pipeline now has 14 gates. Gate 14 reads the live truth doc and blocks publish on any stale version reference or unresolved template variable. 37/37 gate tests passing.
+- **Schema additions for `license_state` table** — `aibrain_db.py` adds the per-user license_state schema + connection-pool fixes.
+
+### Improved
+- **README template variables** — README now auto-renders to the current state via the live truth doc instead of being a manual sync surface.
+
+### Fixed
+- **Defensive None handling in `workflow_runner`** — Print statements no longer crash when `quality`/`model_used`/`duration_ms` are `None` (which is the new contract per the honest-measurement rebuild — defaults are None until a real measurement lands). Pattern #11 fix.
+
 ## [1.4.0] - 2026-04-11
 
 ### Added

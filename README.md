@@ -4,9 +4,20 @@
 
 AIBrain is a self-hosted operating system for AI agents. It gives any agent persistent memory, typed Agent/Task/Team composition, a decorator-driven Flow engine, document ingestion, universal MCP client connectivity, a reactive workflow engine, a self-improvement loop with honest-rubric divergence detection, multi-model LLM routing, an approval queue, inter-agent messaging, and 60 ready-to-run workflows -- all behind a 53-page browser dashboard. Deploy it on a laptop, a VPS, or in Docker; your agent carries its entire brain with it.
 
-![AIBrain](https://img.shields.io/badge/AIBrain-v1.4.0-00F5D4?style=flat-square) ![License](https://img.shields.io/badge/license-Proprietary-blue?style=flat-square) ![Python](https://img.shields.io/badge/python-3.10+-blue?style=flat-square) ![Tests](https://img.shields.io/badge/tests-2065-00F5D4?style=flat-square) ![Workflows](https://img.shields.io/badge/workflows-60-00F5D4?style=flat-square) ![Dashboard](https://img.shields.io/badge/dashboard-53_pages-61DAFB?style=flat-square) ![MCP](https://img.shields.io/badge/MCP-native-FFB000?style=flat-square)
+![AIBrain](https://img.shields.io/badge/AIBrain-v1.4.1-00F5D4?style=flat-square) ![License](https://img.shields.io/badge/license-Proprietary-blue?style=flat-square) ![Python](https://img.shields.io/badge/python-3.10+-blue?style=flat-square) ![Tests](https://img.shields.io/badge/tests-2065-00F5D4?style=flat-square) ![Workflows](https://img.shields.io/badge/workflows-60-00F5D4?style=flat-square) ![Dashboard](https://img.shields.io/badge/dashboard-53_pages-61DAFB?style=flat-square) ![MCP](https://img.shields.io/badge/MCP-native-FFB000?style=flat-square)
 
 ---
+
+## What's New in v1.4.1
+
+Shipped 2026-04-12. Patch release — security hardening + Stripe per-user wiring + V2 persona registry.
+
+- **AIBRAIN_SIGNING_KEY now mandatory** — `aibrain_licensing.py` no longer falls back to a hardcoded signing key. The env var must be set or import raises `ValueError` at import time. **A public hardcoded fallback would let anyone reading the open-source repo mint valid license keys.** Fail-loud at import is the right contract for paid software. After upgrading: `export AIBRAIN_SIGNING_KEY="<your secret>"` before running anything aibrain-related.
+- **Per-user license_state writes** — `backend/main.py` now writes license state per user via `_write_license_state_per_user()`, with `client_reference_id → users.id → email → users.email` resolution. Closes the Stripe webhook attribution gap.
+- **V2 persona registry wired** — `aibrain/core/workflow_runner.py` now registers `intel_agent_v2` and the rest of the V2 persona fleet. `aibrain/core/superworker.py` resolves `*_v2.md` persona paths before falling back to V1.
+- **Content gate 14 (template_freshness)** — Pipeline now has 14 gates. Gate 14 reads the live truth doc and blocks publish on any stale version reference or unresolved template variable. 37/37 gate tests passing.
+- **Defensive None handling** — `workflow_runner` print statements no longer crash when quality/model_used/duration_ms are None (which is the new contract per the honest-measurement rebuild — defaults are None until measured).
+- **README template variables** — README now auto-renders to the current state via the live truth doc instead of being a manual sync surface.
 
 ## What's New in v1.4.0
 

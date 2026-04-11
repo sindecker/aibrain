@@ -1,6 +1,6 @@
 # AIBrain — The Complete Guidebook
 
-**Version:** 1.4.0 | **Last updated:** 2026-04-12
+**Version:** 1.4.1 | **Last updated:** 2026-04-12
 
 AIBrain is a portable agent operating system that gives any AI agent persistent memory, typed Agent/Task/Team composition, a decorator-driven Flow engine, document ingestion, universal MCP client connectivity, self-learning workflows, multi-agent coordination, and a full browser dashboard. It works with Claude, GPT, Ollama, or any LLM — no vendor lock-in.
 
