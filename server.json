@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.sindecker/aibrain",
   "title": "AIBrain Memory",
-  "description": "Persistent memory layer for AI agents. Stores, searches, and recalls memories across sessions using CLS dual-system architecture (episodic + semantic). Zero config — backs to ~/aibrain.db by default.",
+  "description": "Persistent memory for AI agents. CLS dual-system architecture, zero config, backs to ~/aibrain.db.",
   "version": "1.5.14",
   "repository": {
     "url": "https://github.com/sindecker/aibrain",
