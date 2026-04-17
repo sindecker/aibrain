@@ -1,0 +1,59 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.sindecker/aibrain",
+  "title": "AIBrain Memory",
+  "description": "Persistent memory layer for AI agents. Stores, searches, and recalls memories across sessions using CLS dual-system architecture (episodic + semantic). Zero config — backs to ~/aibrain.db by default.",
+  "version": "1.5.14",
+  "repository": {
+    "url": "https://github.com/sindecker/aibrain",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "pypi",
+      "registryBaseUrl": "https://pypi.org",
+      "identifier": "aibrain",
+      "version": "1.5.14",
+      "runtimeHint": "python",
+      "packageArguments": [
+        {
+          "type": "positional",
+          "value": "-m",
+          "isRequired": true
+        },
+        {
+          "type": "positional",
+          "value": "aibrain.mcp",
+          "isRequired": true
+        }
+      ],
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "AIBRAIN_DB",
+          "description": "Path to the AIBrain SQLite database. Defaults to ~/aibrain.db if not set.",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ],
+  "_meta": {
+    "tags": ["memory", "agents", "productivity", "persistent-memory", "rag"],
+    "tools": [
+      "memory_store",
+      "memory_search",
+      "memory_recall",
+      "memory_stats",
+      "memory_prepare",
+      "memory_ingest",
+      "memory_forget",
+      "memory_cite",
+      "file_reference_search",
+      "file_reference_topic",
+      "task_route"
+    ]
+  }
+}
